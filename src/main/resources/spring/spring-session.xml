@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                           http://www.springframework.org/schema/cache
+                           http://www.springframework.org/schema/cache/spring-cache-4.3.xsd">
+
+    <!-- 配置数据库相关参数 -->
+    <context:property-placeholder location="classpath:properties/redis.properties" file-encoding="utf-8" ignore-unresolvable="true" />
+
+    <!-- Spring-Session 主配置 -->
+    <context:annotation-config/>
+
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <!-- 过期时间100分钟 -->
+        <property name="maxInactiveIntervalInSeconds" value="6000"></property>
+    </bean>
+
+    <!-- 下面是开发用的 redis 配置 -->
+    <bean id="sessionJedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.pool.maxIdle}" /> <!-- 最大能够保持idel状态的对象数  -->
+        <property name="maxTotal" value="${redis.pool.maxTotal}" /> <!-- 最大分配的对象数 -->
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}" /> <!-- 当调用borrow Object方法时，是否进行有效性检查 -->
+        <property name="maxWaitMillis" value="${redis.pool.maxWaitMillis}" />
+    </bean>
+
+    <!-- 下面是开发用的 redis 配置 -->
+    <bean id="sessionJedisConnectionFactory" primary="true" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="usePool" value="true"></property>
+        <property name="hostName" value="${redis.session.host}" />
+        <property name="port" value="${redis.session.port}" />
+        <property name="password" value="#{'${redis.session.password}'!=''?'${redis.session.password}':null}" />
+        <property name="timeout" value="${redis.session.timeout}" />
+        <property name="database" value="${redis.session.database}"></property>
+        <constructor-arg index="0" ref="sessionJedisPoolConfig" />
+    </bean>
+
+    <!-- 下面是生产环境 redis-cluster 的配置
+    <bean class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+      <constructor-arg index="0">
+        <bean class="org.springframework.data.redis.connection.RedisClusterConfiguration">
+          <constructor-arg index="0">
+            <set>
+              <value>192.168.18.60:7001</value>
+              <value>192.168.18.60:7002</value>
+              <value>192.168.18.60:7003</value>
+              <value>192.168.18.60:7004</value>
+              <value>192.168.18.60:7005</value>
+              <value>192.168.18.60:7006</value>
+            </set>
+          </constructor-arg>
+          <property name="maxRedirects" value="3" />
+        </bean>
+      </constructor-arg>
+
+      <constructor-arg index="1">
+        <bean class="redis.clients.jedis.JedisPoolConfig">
+          <property name="maxIdle" value="60000" />
+          <property name="testOnBorrow" value="true" />
+          <property name="testOnReturn" value="true" />
+        </bean>
+      </constructor-arg>
+    </bean>
+    -->
+</beans>
