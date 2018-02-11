@@ -30,7 +30,7 @@ public class CategorySecond implements Serializable {
      * categorysecond表和category表是多对一关系
      * @JoinColumn要再多的一方设置
      */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="cid")
     private Category category;
 

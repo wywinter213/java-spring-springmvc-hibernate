@@ -40,6 +40,8 @@
         <mapping class="com.shop.model.Order"/>
         <mapping class="com.shop.model.OrderItem"/>
         <mapping class="com.shop.model.Product"/>
+        <mapping class="com.shop.model.CategorySecond"/>
+        <mapping class="com.shop.model.Category"/>
 
     </session-factory>
 </hibernate-configuration>

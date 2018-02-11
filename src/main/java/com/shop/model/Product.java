@@ -51,12 +51,12 @@ public class Product implements Serializable {
      * @optional 定义是否为必需属性，如果为必需（false），但在持久化时user = null,则会持久化失败
      * @targetEntity 目标关联对象，默认为被注解属性所在类
      */
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name="csid")//@JoinColumn注解的都是在“主控方”，因而我们需要注解在Product类中
-//    private CategorySecond categorySecond;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name="csid")//@JoinColumn注解的都是在“主控方”，因而我们需要注解在Product类中
+    private CategorySecond categorySecond;
 
     //与orderitem表是一对多关系
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "product")
     private Set<OrderItem> orderItems;
 
     public Set<OrderItem> getOrderItems() {

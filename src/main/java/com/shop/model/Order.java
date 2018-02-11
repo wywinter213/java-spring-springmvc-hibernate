@@ -36,12 +36,12 @@ public class Order implements Serializable{
     private Float total;
 
     //一个用户可以有多个订单 ，是多对一的关系
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private User user;
 
     //与orderitem表是一对多关系
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "order")
     private Set<OrderItem> orderItems;
 
     public Set<OrderItem> getOrderItems() {

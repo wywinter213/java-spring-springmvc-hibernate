@@ -21,6 +21,7 @@ public class BaseDaoTest {
 
     @Before
     public void setUp() throws Exception {
+
         Configuration cfg = new Configuration();
 
         // 读取指定的配置文件
@@ -76,6 +77,8 @@ public class BaseDaoTest {
 
     @Test
     public void get() {
+        User user = session.get(User.class, 5);
+        System.out.println(user.getWallet().getMoney());
     }
 
     @Test

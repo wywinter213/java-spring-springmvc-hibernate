@@ -30,21 +30,21 @@ public class Category implements Serializable{
     private Date privilegeTime;
 
     //一对多
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "cid")
-    @OrderBy(value="csid")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "category")
+    @OrderBy(value="csid")//使用categorySeconds的主键排序
     private Set<CategorySecond> categorySeconds;
 
     //一对一
-    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "category")
-    private Ticket ticket;
+//    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "category")
+//    private Ticket ticket;
 
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
+//    public Ticket getTicket() {
+//        return ticket;
+//    }
+//
+//    public void setTicket(Ticket ticket) {
+//        this.ticket = ticket;
+//    }
 
     public Integer getCid() {
         return cid;

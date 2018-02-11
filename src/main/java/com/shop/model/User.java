@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  CREATE TABLE `user` (
@@ -75,16 +76,16 @@ public class User implements Serializable{
 //    private Date birdDate;
 
     //卡包和用户表有一对一的关系
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Packet packet;
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user")
+    private Packet packet;
 //
 //    //一个人有一个钱包，一对一关系
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Wallet wallet;
+    @OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "user")
+    private Wallet wallet;
 
     //一个用户可能有多个订单，一对多关系
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "uid")
-//    private Set<Order> orders;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Order> orders;
 
     /**
      * 构造函数，初始化类属性
@@ -124,29 +125,29 @@ public class User implements Serializable{
         return Objects.hash(uid, username, password, name, email, phone, age, addr, state, code);
     }
 
-//    public Set<Order> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(Set<Order> orders) {
-//        this.orders = orders;
-//    }
+    public Set<Order> getOrders() {
+        return orders;
+    }
 
-//    public Wallet getWallet() {
-//        return wallet;
-//    }
-//
-//    public void setWallet(Wallet wallet) {
-//        this.wallet = wallet;
-//    }
-//
-//    public Packet getPacket() {
-//        return packet;
-//    }
-//
-//    public void setPacket(Packet packet) {
-//        this.packet = packet;
-//    }
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public Packet getPacket() {
+        return packet;
+    }
+
+    public void setPacket(Packet packet) {
+        this.packet = packet;
+    }
 
     public Integer getUid() {
         return uid;

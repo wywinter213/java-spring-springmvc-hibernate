@@ -16,8 +16,8 @@ public class Packet implements Serializable{
     private Integer pacid;
 
     //一个客户有一个卡包，是一对一的外键关系
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "uid")
+    @OneToOne(optional = false)
+    @JoinColumn(name = "uid", unique = true)
     private User user;
 
     public Integer getPacid() {
