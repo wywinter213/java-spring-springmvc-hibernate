@@ -33,6 +33,8 @@
         <property name="hibernate.format_sql">true</property>
         <!-- 避免这个错误信息Disabling contextual LOB creation as createClob() method threw error :java.lang.reflect.InvocationTargetException -->
         <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+
+        <property name="current_session_context_class">thread</property>
         <!-- 罗列所有持久化类的类名 -->
         <mapping class="com.shop.model.User"/>
         <mapping class="com.shop.model.Packet"/>

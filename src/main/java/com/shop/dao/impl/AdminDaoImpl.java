@@ -5,6 +5,7 @@ import com.shop.model.Admin;
 import org.springframework.stereotype.Repository;
 
 @Repository("AdminDao")
+@SuppressWarnings("all")
 public class AdminDaoImpl extends BaseDaoImpl<Admin> implements AdminDao {
 
     @Override

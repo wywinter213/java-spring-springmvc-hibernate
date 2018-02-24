@@ -17,7 +17,7 @@
   </listener>
   <!-- 加载spring核心 -->
 
-  <!-- 前端控制器 -->
+    <!-- 前端控制器 -->
   <servlet>
     <servlet-name>shop-demo</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -113,5 +113,5 @@
     <url-pattern > /druid/* </url-pattern >
   </servlet-mapping >
   <!-- 连接池 启用 Web 监控统计功能 http://ip:port/projectName/druid/index.html   end-->
-
+  <absolute-ordering/>
 </web-app>
