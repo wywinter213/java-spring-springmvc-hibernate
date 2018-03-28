@@ -24,7 +24,7 @@ spring 核心配置文件
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
     <!-- 导入数据库的相关配置 -->
-    <!--<import resource="classpath:spring/spring-hibernate.xml" />-->
+    <import resource="classpath:spring/spring-hibernate.xml" />
     <!--&lt;!&ndash; 导入缓存的相关配置 &ndash;&gt;-->
     <!--<import resource="classpath:spring/spring-cache.xml" />-->
     <!--&lt;!&ndash; 导入session的相关配置 &ndash;&gt;-->

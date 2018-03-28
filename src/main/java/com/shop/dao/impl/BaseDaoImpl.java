@@ -24,6 +24,7 @@ public class BaseDaoImpl<T> implements BaseDao<T>{
         //识别当前操作的实体类
         ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         this.clazz = (Class<T>) type.getActualTypeArguments()[0];
+//        ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments();
 
         // to do list
     }

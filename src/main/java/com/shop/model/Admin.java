@@ -10,7 +10,7 @@ import java.io.Serializable;
  `minventory` int(11) NOT NULL,
  */
 
-@Entity()
+@Entity
 @Table(name = "adminuser")
 public class Admin implements Serializable{
 
